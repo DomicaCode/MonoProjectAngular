@@ -1,0 +1,27 @@
+<h1>Makes</h1>
+
+<p *ngIf="!makes"><em>Loading...</em></p>
+
+<table class='table' *ngIf="makes">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Abrv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let make of makes">
+      <td>{{ make.id }}</td>
+      <td>{{ make.name }}</td>
+      <td>{{ make.abrv }}</td>
+      <td>
+        <a [routerLink]="['/editMake/', make.id]">Edit</a> |
+        <a [routerLink]="['/detailsMake/', make.id]">Details</a>|
+        <a (click)="deleteMake(make.id)">Delete</a> |
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a [routerLink]="['/createMake/']" >Create new</a>

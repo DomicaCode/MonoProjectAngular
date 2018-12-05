@@ -1,0 +1,27 @@
+<h1>Edit Make</h1>
+
+
+<form id="form" ngNoForm method="put" action="/api/SampleData/EditMake"
+      enctype="application/x-www-form-urlencoded">
+  <div>
+    <label for="Id">Id</label>
+  </div>
+  <div>
+    <input name="Id"  ngDefaultControl type="text" [(ngModel)]="currentId" value="{{CurrentId}}"/>
+  </div>
+  <div>
+    <label for="Name">Name</label>
+  </div>
+  <div>
+    <input name="Name"  ngDefaultControl type="text" [ngModel]="currentName" value="{{CurrentName}}" />
+  </div>
+  <div>
+    <label for="Abrv">Abrv</label>
+  </div>
+  <div>
+    <input name="Abrv" ngDefaultControl type="text" [(ngModel)]="currentAbrv" value="{{CurrentAbrv}}" />
+  </div>
+    <div>
+      <input type="submit" value="Submit" />
+    </div>
+</form>
