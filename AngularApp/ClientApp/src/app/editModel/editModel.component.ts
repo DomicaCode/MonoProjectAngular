@@ -34,6 +34,8 @@ export class EditModelComponent implements OnInit
 
   }
 
+
+
   GetInfo(id)
   {
     const data = this.http.get< Models[]>(this.baseUrl + "api/SampleData/EditModel/" + id).subscribe(result => {

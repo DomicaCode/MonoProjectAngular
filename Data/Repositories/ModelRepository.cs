@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
@@ -23,25 +24,25 @@ namespace Data.Repositories
             _source = this.context.VehicleModel;
         }
 
-        public async void Delete(VehicleModelEntity entity)
+        public async Task Delete(VehicleModelEntity entity)
         {
             context.VehicleModel.Remove(entity);
             await context.SaveChangesAsync();
         }
 
-        public async void Insert(VehicleModelEntity entity)
+        public async Task Insert(VehicleModelEntity entity)
         {
             await context.VehicleModel.AddAsync(entity);
             await context.SaveChangesAsync();
         }
 
-        public async void Update(VehicleModelEntity entity)
+        public async Task Update(VehicleModelEntity entity)
         {
             context.VehicleModel.Update(entity);
             await context.SaveChangesAsync();
         }
 
-        public IEnumerable<VehicleModelEntity> SelectListModel(int index, int count, Expression<Func<VehicleModelEntity, int>> orderLambda)
+        public async Task<IEnumerable<VehicleModelEntity>> SelectListModel(int index, int count, Expression<Func<VehicleModelEntity, int>> orderLambda)
         {
             return _source.Skip(index * count).Take(count).OrderBy(orderLambda);
         }
@@ -51,7 +52,7 @@ namespace Data.Repositories
             context.Dispose();
         }
 
-        public async void Details(VehicleModelEntity entity)
+        public async Task Details(VehicleModelEntity entity)
         {
             context.VehicleModel.Find(entity);
             await context.SaveChangesAsync();

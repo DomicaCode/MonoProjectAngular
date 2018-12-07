@@ -8,6 +8,7 @@ using System.Data;
 using Data.Entities;
 using System.Linq.Expressions;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
@@ -25,33 +26,33 @@ namespace Data.Repositories
             _source = this.context.VehicleMake;
         }
 
-        public async void Delete(VehicleMakeEntity entity)
+        public async Task Delete(VehicleMakeEntity entity)
         {
              context.VehicleMake.Remove(entity);
              await context.SaveChangesAsync();
         }
 
-        public async void Insert(VehicleMakeEntity entity)
+        public async Task Insert(VehicleMakeEntity entity)
         {
             context.VehicleMake.Add(entity);
             await context.SaveChangesAsync();
         }
 
-        public async void Update(VehicleMakeEntity entity)
+        public async Task Update(VehicleMakeEntity entity)
         {
             context.VehicleMake.Update(entity);
             await context.SaveChangesAsync();
         }
 
-        public async void Details(VehicleMakeEntity entity)
+        public async Task Details(VehicleMakeEntity entity)
         {
             context.VehicleMake.Find(entity);
             await context.SaveChangesAsync();
         }
 
-        public IEnumerable<VehicleMakeEntity> SelectListMake(int index, int count, Expression<Func<VehicleMakeEntity, int>> orderLambda)
+        public async Task<IEnumerable<VehicleMakeEntity>> SelectListMake(int index, int count, Expression<Func<VehicleMakeEntity, int>> orderLambda)
         {
-            return  _source.Skip(index * count).Take(count).OrderBy(orderLambda);
+            return _source.Skip(index * count).Take(count).OrderBy(orderLambda);
         }
 
         public void Dispose()

@@ -21,36 +21,36 @@ namespace AngularApp.Controllers
 
         [Route("api/[controller]/Makes")]
         [HttpGet("[action]")]
-        public IActionResult Makes()
+        public async Task<IActionResult> Makes()
         {
-            var data = _vehicleService.GetMake(0, 10);
+            var data = await _vehicleService.GetMake(0, 10);
 
             return Ok(data);
         }
 
         [Route("api/[controller]/Models")]
         [HttpGet("[action]")]
-        public IActionResult Models()
+        public async Task<IActionResult> Models()
         {
-            var data = _vehicleService.GetModel(0, 10);
+            var data = await _vehicleService.GetModel(0, 10);
 
             return Ok(data);
         }
 
         [Route("api/[controller]/CreateMake")]
         [HttpPost("[action]")]
-        public IActionResult CreateMake([FromForm] VehicleDto vehicle)
+        public async Task<IActionResult> CreateMake([FromForm] VehicleDto vehicle)
         {
-            _vehicleService.InsertMake(vehicle);
+            await _vehicleService.InsertMake(vehicle);
 
             return RedirectToAction("Make");
         }
 
         [Route("api/[controller]/CreateModel")]
         [HttpPost("[action]")]
-        public IActionResult CreateModel([FromForm] VehicleDto vehicle)
+        public async Task<IActionResult> CreateModel([FromForm] VehicleDto vehicle)
         {
-            _vehicleService.InsertModel(vehicle);
+            await _vehicleService.InsertModel(vehicle);
 
             return RedirectToAction("Model");
         }
@@ -58,18 +58,18 @@ namespace AngularApp.Controllers
 
         [Route("api/[Controller]/DeleteMake/{id:int}")]
         [HttpDelete("[action]")]
-        public IActionResult DeleteMake(int id)
+        public async Task <IActionResult> DeleteMake(int id)
         {
-            VehicleDto vehiclemodel = _vehicleService.GetModelByMakeId(id);
+            VehicleDto vehiclemodel = await _vehicleService.GetModelByMakeId(id);
 
             if (vehiclemodel != null)
             {
-                _vehicleService.DeleteModel(vehiclemodel);
-                DeleteMakeModel(id);
+                await _vehicleService.DeleteModel(vehiclemodel);
+                await DeleteMakeModel(id);
             }
             else
             {
-                DeleteMakeModel(id);
+                await DeleteMakeModel(id);
             }
 
 
@@ -77,18 +77,18 @@ namespace AngularApp.Controllers
 
         }
 
-        public void DeleteMakeModel(int id)
+        public async Task DeleteMakeModel(int id)
         {
-            VehicleDto vehicle = _vehicleService.GetMakeById(id);
-            _vehicleService.DeleteMake(vehicle);
+            VehicleDto vehicle = await _vehicleService.GetMakeById(id);
+            await _vehicleService.DeleteMake(vehicle);
         }
 
         [Route("api/[Controller]/DeleteModel/{id:int}")]
         [HttpDelete("[action]")]
-        public IActionResult DeleteModel(int id)
+        public async Task<IActionResult> DeleteModel(int id)
         {
-            VehicleDto vehiclemodel = _vehicleService.GetModelById(id);
-            _vehicleService.DeleteModel(vehiclemodel);
+            VehicleDto vehiclemodel = await _vehicleService.GetModelById(id);
+            await _vehicleService.DeleteModel(vehiclemodel);
 
             return RedirectToAction("Model");
 
@@ -96,50 +96,50 @@ namespace AngularApp.Controllers
 
         [HttpPut("[action]")]
         [Route("api/[Controller]/EditMake/")]
-        public IActionResult EditMake(VehicleDto vehicle)
+        public async Task<IActionResult> EditMake(VehicleDto vehicle)
         {
             //vehicle = _vehicleService.GetMakeById(id);
-            _vehicleService.UpdateMake(vehicle);
+            await _vehicleService.UpdateMake(vehicle);
 
             return RedirectToAction("Make");
         }
 
         [HttpGet]
         [Route("api/[Controller]/EditMake/{id:int}")]
-        public IActionResult EditMake(int id)
+        public async Task<IActionResult> EditMake(int id)
         {
-            return Ok(_vehicleService.GetMakeById(id));
+            return Ok(await _vehicleService.GetMakeById(id));
         }
 
         [HttpGet]
         [Route("api/[Controller]/EditModel/{id:int}")]
-        public IActionResult EditModel(int id)
+        public async Task<IActionResult> EditModel(int id)
         {
-            return Ok(_vehicleService.GetModelById(id));
+            return Ok(await _vehicleService.GetModelById(id));
         }
 
         [HttpPut("[action]")]
         [Route("api/[Controller]/EditModel/")]
-        public IActionResult EditModel(VehicleDto vehicle)
+        public async Task<IActionResult> EditModel(VehicleDto vehicle)
         {
             //vehicle = _vehicleService.GetMakeById(id);
-            _vehicleService.UpdateModel(vehicle);
+            await _vehicleService.UpdateModel(vehicle);
 
             return RedirectToAction("Model");
         }
 
         [HttpGet]
         [Route("api/[Controller]/DetailsMake/{id:int}")]
-        public IActionResult DetailsMake(int id)
+        public async Task<IActionResult> DetailsMake(int id)
         {
-            return Ok(_vehicleService.GetMakeById(id));
+            return Ok(await _vehicleService.GetMakeById(id));
         }
 
         [HttpGet]
         [Route("api/[Controller]/DetailsModel/{id:int}")]
-        public IActionResult DetailsModel(int id)
+        public async Task<IActionResult> DetailsModel(int id)
         {
-            return Ok(_vehicleService.GetModelById(id));
+            return Ok(await _vehicleService.GetModelById(id));
         }
     }
 }

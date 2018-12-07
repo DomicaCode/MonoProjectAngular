@@ -33,6 +33,7 @@ export class EditMakeComponent implements OnInit
 
   }
 
+
   GetInfo(id)
   {
     const data = this.http.get< Makes[]>(this.baseUrl + "api/SampleData/EditMake/" + id).subscribe(result => {

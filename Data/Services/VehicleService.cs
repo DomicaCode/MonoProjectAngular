@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Linq;
 using AutoMapper;
 using Data.Context;
+using System.Threading.Tasks;
 
 namespace Data.Services
 {
@@ -31,9 +32,9 @@ namespace Data.Services
             _dbContext = context;
         }
 
-        public IEnumerable<VehicleDto> GetMake(int index, int count)
+        public async Task<IEnumerable<VehicleDto>> GetMake(int index, int count)
         {
-            var data = _makeRepository.SelectListMake(index, count, p => p.Id);
+            var data =  await _makeRepository.SelectListMake(index, count, p => p.Id);
 
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
             IMapper mapper = config.CreateMapper(); 
@@ -43,9 +44,9 @@ namespace Data.Services
             return vehicleDto;
         }
         
-        public IEnumerable<VehicleDto> GetModel(int index, int count)
+        public async Task<IEnumerable<VehicleDto>> GetModel(int index, int count)
         {
-            var data = _modelRepository.SelectListModel(index, count, p => p.Id);
+            var data = await _modelRepository.SelectListModel(index, count, p => p.Id);
 
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
             IMapper mapper = config.CreateMapper();
@@ -55,7 +56,7 @@ namespace Data.Services
             return vehicleDto;
         }
         
-        public async void InsertMake(VehicleDto vehicleDto)
+        public async Task InsertMake(VehicleDto vehicleDto)
         {
             
             // Ovaj automapper config treba abstractat
@@ -64,10 +65,10 @@ namespace Data.Services
 
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
-             _makeRepository.Insert(entity);
+             await _makeRepository.Insert(entity);
         }
 
-        public async void InsertModel(VehicleDto vehicleDto)
+        public async Task InsertModel(VehicleDto vehicleDto)
         {
             
             // Ovaj automapper config treba abstractat
@@ -77,10 +78,10 @@ namespace Data.Services
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
-            _modelRepository.Insert(entity);
+            await _modelRepository.Insert(entity);
         }
 
-        public async void DeleteMake(VehicleDto vehicleDto)
+        public async Task DeleteMake(VehicleDto vehicleDto)
         {
             
             // Ovaj automapper config treba abstractat
@@ -89,10 +90,10 @@ namespace Data.Services
 
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
-            _makeRepository.Delete(entity);
+            await _makeRepository.Delete(entity);
         }
 
-        public async void DeleteModel(VehicleDto vehicleDto)
+        public async Task DeleteModel(VehicleDto vehicleDto)
         {
             
             // Ovaj automapper config treba abstractat
@@ -102,10 +103,10 @@ namespace Data.Services
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
-            _modelRepository.Delete(entity);
+            await _modelRepository.Delete(entity);
         }
 
-        public async void UpdateMake(VehicleDto vehicleDto)
+        public async Task UpdateMake(VehicleDto vehicleDto)
         {
             
             // Ovaj automapper config treba abstractat
@@ -115,10 +116,10 @@ namespace Data.Services
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
 
-            _makeRepository.Update(entity);
+            await _makeRepository.Update(entity);
         }
 
-        public async void UpdateModel(VehicleDto vehicleDto)
+        public async Task UpdateModel(VehicleDto vehicleDto)
         {
             
             // Ovaj automapper config treba abstractat
@@ -128,10 +129,10 @@ namespace Data.Services
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
-            _modelRepository.Update(entity);
+            await _modelRepository.Update(entity);
         }
 
-        public async void DetailsMake(VehicleDto vehicleDto)
+        public async Task DetailsMake(VehicleDto vehicleDto)
         {
             // Ovaj automapper config treba abstractat
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
@@ -140,10 +141,10 @@ namespace Data.Services
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
 
 
-            _makeRepository.Details(entity);
+            await _makeRepository.Details(entity);
         }
 
-        public async void DetailsModel(VehicleDto vehicleDto)
+        public async Task DetailsModel(VehicleDto vehicleDto)
         {
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
             IMapper mapper = config.CreateMapper();
@@ -151,10 +152,10 @@ namespace Data.Services
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
 
 
-            _modelRepository.Details(entity);
+            await _modelRepository.Details(entity);
         }
 
-        public VehicleDto GetMakeById(int id)
+        public async Task<VehicleDto> GetMakeById(int id)
         {
             var entity = _dbContext.VehicleMake.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
 
@@ -166,7 +167,7 @@ namespace Data.Services
             return vehicleDto;
         }
 
-        public VehicleDto GetModelByMakeId(int id)
+        public async Task<VehicleDto> GetModelByMakeId(int id)
         {
             var entity = _dbContext.VehicleModel.AsNoTracking().Where(x => x.MakeId == id).FirstOrDefault();
 
@@ -178,7 +179,7 @@ namespace Data.Services
             return vehicleDto;
         }
 
-        public VehicleDto GetModelById(int id)
+        public async Task<VehicleDto> GetModelById(int id)
         {
             var entity = _dbContext.VehicleModel.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
 

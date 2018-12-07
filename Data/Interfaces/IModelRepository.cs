@@ -3,19 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
     public interface IModelRepository : IDisposable
     {
-        void Insert(VehicleModelEntity entity);
+        Task Insert(VehicleModelEntity entity);
 
-        void Update(VehicleModelEntity entity);
+        Task Update(VehicleModelEntity entity);
 
-        void Delete(VehicleModelEntity entity);
+        Task Delete(VehicleModelEntity entity);
 
-        IEnumerable<VehicleModelEntity> SelectListModel(int index, int count, Expression<Func<VehicleModelEntity, int>> orderLambda);
+        Task<IEnumerable<VehicleModelEntity>> SelectListModel(int index, int count, Expression<Func<VehicleModelEntity, int>> orderLambda);
 
-        void Details(VehicleModelEntity entity);
+        Task Details(VehicleModelEntity entity);
     }
 }
