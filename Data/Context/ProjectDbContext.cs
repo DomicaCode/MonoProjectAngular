@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Data.Context
 {
-    public class ProjectDbContext : DbContext
+    public class ProjectDbContext : DbContext, IProjectDbContext
     {
         public DbSet<VehicleMakeEntity> VehicleMake { get; set; }
         public DbSet<VehicleModelEntity> VehicleModel { get; set; }
@@ -56,6 +57,11 @@ namespace Data.Context
             modelBuilder.Entity<VehicleModelEntity>().Property(p => p.Abrv).HasColumnName("Abrv").HasColumnType("varchar(255)").HasDefaultValueSql("''").IsRequired();
             modelBuilder.Entity<VehicleModelEntity>().HasOne(m => m.Make).WithMany(n => n.Models).HasForeignKey(m => m.MakeId).HasConstraintName("fk_property");
 
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
