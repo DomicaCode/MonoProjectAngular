@@ -11,6 +11,7 @@ using Data.Context;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace MonoProject.Tests
 {
@@ -39,9 +40,11 @@ namespace MonoProject.Tests
 
             //var options = new DbContextOptionsBuilder<ProjectDbContext>().UseInMemoryDatabase(databaseName: "mono").Options;
 
-            var context = new ProjectDbContext();
+            var context = new Mock<ProjectDbContext>();
 
-            var testingClass = new VehicleService(testMakeRepository.Object, testModelRepository.Object, context);
+            context.Setup(m => m.Add(vehiclemake));
+
+            var testingClass = new VehicleService(testMakeRepository.Object, testModelRepository.Object, context.Object);
 
             //act
 
@@ -50,7 +53,21 @@ namespace MonoProject.Tests
             //assert
             //testingClass.InsertModel().Should().
 
+
             Assert.True(insertMethod.IsCompletedSuccessfully);
         }
+
+        /*
+        [Fact]
+        public void InsertModelTestTwo()
+        {
+            var data = new List<VehicleModelEntity>
+            {
+                new VehicleModelEntity{ Id = 1, MakeId = 1 ,Name = "test1", Abrv = "test1" },
+                new VehicleModelEntity{ Id = 2, MakeId = 2 ,Name = "test2", Abrv = "test2" },
+                new VehicleModelEntity{ Id = 3, MakeId = 3 ,Name = "test3", Abrv = "test3" },
+            }.AsQueryable();
+        }
+        */
     }
 }

@@ -14,6 +14,7 @@ namespace AngularApp.Controllers
 
         private readonly IVehicleService _vehicleService;
 
+
         public SampleDataController(IVehicleService vehicleService)
         {
             _vehicleService = vehicleService;
