@@ -10,19 +10,28 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <StartupObject>AngularApp.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="EntityFrameworkPaginateCore" Version="1.1.0" />
     <PackageReference Include="FluentAssertions" Version="5.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ninject.Web" Version="3.2.1" />
     <PackageReference Include="Ninject.Web.Common" Version="3.3.1" />
     <PackageReference Include="Ninject.Web.WebApi" Version="3.3.0" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="4.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\MonoProject.WebAPI\MonoProject.WebAPI.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

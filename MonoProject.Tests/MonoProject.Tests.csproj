@@ -8,16 +8,23 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="EntityFrameworkPaginateCore" Version="1.1.0" />
     <PackageReference Include="FluentAssertions" Version="5.5.3" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ninject.Web" Version="3.2.1" />
     <PackageReference Include="Ninject.Web.Common" Version="3.3.1" />
     <PackageReference Include="Ninject.Web.WebApi" Version="3.3.0" />
+    <PackageReference Include="NonFactors.Grid.Mvc6" Version="4.0.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -26,7 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\MonoProject.DAL\MonoProject.DAL.csproj" />
+    <ProjectReference Include="..\MonoProject.Model\MonoProject.Model.csproj" />
+    <ProjectReference Include="..\MonoProject.Repository.Common\MonoProject.Repository.Common.csproj" />
+    <ProjectReference Include="..\MonoProject.Repository\MonoProject.Repository.csproj" />
+    <ProjectReference Include="..\MonoProject.Service\MonoProject.Service.csproj" />
   </ItemGroup>
 
 </Project>

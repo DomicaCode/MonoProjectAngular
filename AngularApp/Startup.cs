@@ -1,7 +1,8 @@
-using Data.Context;
-using Data.Interfaces;
-using Data.Repositories;
-using Data.Services;
+using MonoProject.DAL;
+using MonoProject.Repository;
+using MonoProject.Repository.Common;
+using MonoProject.Service;
+using MonoProject.Service.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

@@ -5,10 +5,10 @@ using Moq;
 using Xunit;
 using FluentAssertions;
 using System.Threading.Tasks;
-using Data.Services;
-using Data.Interfaces;
-using Data.Context;
-using Data.Entities;
+using MonoProject.DAL;
+using MonoProject.Repository.Common;
+using MonoProject.Model;
+using MonoProject.Service;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -32,10 +32,10 @@ namespace MonoProject.Tests
             var vehicledto = new VehicleDto();
 
             var testMakeRepository = new Mock<IMakeRepository>();
-            testMakeRepository.Setup(m => m.Insert(vehiclemake))
+            testMakeRepository.Setup(m => m.AsyncInsert(vehiclemake))
                 .Returns(Task.CompletedTask);
             var testModelRepository = new Mock<IModelRepository>();
-            testModelRepository.Setup(m => m.Insert(vehiclemodel))
+            testModelRepository.Setup(m => m.AsyncInsert(vehiclemodel))
                 .Returns(Task.CompletedTask);
 
             //var options = new DbContextOptionsBuilder<ProjectDbContext>().UseInMemoryDatabase(databaseName: "mono").Options;
@@ -48,7 +48,7 @@ namespace MonoProject.Tests
 
             //act
 
-            var insertMethod = testingClass.InsertModel(vehicledto);
+            var insertMethod = testingClass.AsyncInsertModel(vehicledto);
 
             //assert
             //testingClass.InsertModel().Should().
