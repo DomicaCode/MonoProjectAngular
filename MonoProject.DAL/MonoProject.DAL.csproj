@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MonoProject.Model\MonoProject.Model.csproj" />
+    <ProjectReference Include="..\MonoProject.Repository\MonoProject.Repository.csproj" />
   </ItemGroup>
 
 </Project>

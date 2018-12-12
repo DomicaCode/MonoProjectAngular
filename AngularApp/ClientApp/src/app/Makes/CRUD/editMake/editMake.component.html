@@ -8,19 +8,19 @@
   </div>
   <small>Azurirajte na svoju odgovornost</small>
   <div>
-    <input name="Id"  ngDefaultControl type="text" [(ngModel)]="currentId" value="{{CurrentId}}"/>
+    <input name="Id"  ngDefaultControl type="text" [(ngModel)]="_makeService.currentId" value="{{_makeService.CurrentId}}"/>
   </div>
   <div>
     <label for="Name">Name</label>
   </div>
   <div>
-    <input name="Name"  ngDefaultControl type="text" [ngModel]="currentName" value="{{CurrentName}}" />
+    <input name="Name"  ngDefaultControl type="text" [ngModel]="_makeService.currentName" value="{{_makeService.CurrentName}}" />
   </div>
   <div>
     <label for="Abrv">Abrv</label>
   </div>
   <div>
-    <input name="Abrv" ngDefaultControl type="text" [(ngModel)]="currentAbrv" value="{{CurrentAbrv}}" />
+    <input name="Abrv" ngDefaultControl type="text" [(ngModel)]="_makeService.currentAbrv" value="{{_makeService.CurrentAbrv}}" />
   </div>
     <div>
       <input type="submit" value="Submit" />

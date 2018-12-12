@@ -16,4 +16,8 @@
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MonoProject.Model\MonoProject.Model.csproj" />
+  </ItemGroup>
+
 </Project>

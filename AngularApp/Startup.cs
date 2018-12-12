@@ -1,6 +1,4 @@
 using MonoProject.DAL;
-using MonoProject.Repository;
-using MonoProject.Repository.Common;
 using MonoProject.Service;
 using MonoProject.Service.Common;
 using Microsoft.AspNetCore.Builder;
@@ -31,9 +29,6 @@ namespace AngularApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddScoped<IModelRepository, ModelRepository>();
-
-            services.AddScoped<IMakeRepository, MakeRepository>();
 
             services.AddScoped<IVehicleService, VehicleService>();
 

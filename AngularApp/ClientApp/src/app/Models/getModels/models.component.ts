@@ -8,16 +8,11 @@ import 'rxjs/add/operator/map';
 })
 export class ModelsComponent {
   public models: Models[];
-  CurrentId: number;
-  CurrentName: string;
-  CurrentAbrv: string;
 
-  isEdit = false;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     http.get<Models[]>(baseUrl + 'api/SampleData/Models').subscribe(result => {
       this.models = result;
-      console.log(result);
     }, error => console.error(error));
   }
 

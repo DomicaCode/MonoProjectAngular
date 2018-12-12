@@ -41,7 +41,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\Makes\make.service.ts" />
+    <None Remove="ClientApp\src\app\Models\model.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MonoProject.WebAPI\MonoProject.WebAPI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\Makes\make.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\model.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MakeService } from '../../make.service';
 
 @Component({
   selector: 'app-editMake',
-  templateUrl: './editMake.component.html'
+  templateUrl: './editMake.component.html',
+  providers: [MakeService]
 })
 export class EditMakeComponent implements OnInit
 {
@@ -16,54 +17,30 @@ export class EditMakeComponent implements OnInit
   CurrentAbrv: string;
 
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private activatedRoute: ActivatedRoute)
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private activatedRoute: ActivatedRoute, public _makeService: MakeService)
   {
 
   }
 
   ngOnInit()
   {
-    console.log(this.CurrentId);
-
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const id = parseInt(paramMap.get('id'), 10) || -1;
-      console.log(id);
-      this.GetInfo(id);
-    });
 
+      this.GetObjectById(id);
+    });
   }
 
 
-  GetInfo(id)
+  GetObjectById(id)
   {
-    const data = this.http.get< Makes[]>(this.baseUrl + "api/SampleData/EditMake/" + id).subscribe(result => {
+    this.http.get< Makes[]>(this.baseUrl + "api/SampleData/GetMake/" + id).subscribe(result => {
       this.makes = result;
-      console.log(result);
-      this.CurrentId = result['id'];
-      this.CurrentName = result['name'];
-      this.CurrentAbrv = result['abrv'];
-      /*
-      this.CurrentId = result[0].id;
-      this.CurrentName = result[0].name;
-      this.CurrentAbrv = result[0].abrv;
+      this._makeService.GetObject(result);
 
-      console.log(this.CurrentId);
-      */
     }, error => console.error(error));
   }
-  /*
-  MakeSelected(make: Makes)
-  {
-    this.CurrentId = make.Id;
-    this.CurrentName = make.Name;
-    this.CurrentAbrv = make.Abrv;
-  }
-  */
 
-  save()
-  {
-    return this.http.put(this.baseUrl + 'api/SampleData/EditMake/' + this.CurrentId, { Id: this.CurrentId, Name: this.CurrentName, Abrv: this.CurrentAbrv }).subscribe();
-  }
 
 }
 

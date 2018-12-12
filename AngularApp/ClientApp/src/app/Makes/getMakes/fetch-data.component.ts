@@ -8,16 +8,10 @@ import 'rxjs/add/operator/map';
 })
 export class FetchDataComponent {
   public makes: Makes[];
-  CurrentId: number;
-  CurrentName: string;
-  CurrentAbrv: string;
-
-  isEdit = false;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     http.get<Makes[]>(baseUrl + 'api/SampleData/Makes').subscribe(result => {
       this.makes = result;
-      console.log(result);
     }, error => console.error(error));
   }
 

@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MonoProject.DAL\MonoProject.DAL.csproj" />
     <ProjectReference Include="..\MonoProject.Model\MonoProject.Model.csproj" />
     <ProjectReference Include="..\MonoProject.Repository.Common\MonoProject.Repository.Common.csproj" />
   </ItemGroup>

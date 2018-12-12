@@ -44,7 +44,7 @@ namespace AngularApp.Controllers
         {
             await _vehicleService.AsyncInsertMake(vehicle);
 
-            return RedirectToAction("Make");
+            return Redirect("./fetch-data");
         }
 
         [Route("api/[controller]/CreateModel")]
@@ -105,20 +105,6 @@ namespace AngularApp.Controllers
             return RedirectToAction("Make");
         }
 
-        [HttpGet]
-        [Route("api/[Controller]/EditMake/{id:int}")]
-        public async Task<IActionResult> EditMake(int id)
-        {
-            return Ok(await _vehicleService.AsyncGetMakeById(id));
-        }
-
-        [HttpGet]
-        [Route("api/[Controller]/EditModel/{id:int}")]
-        public async Task<IActionResult> AsyncEditModel(int id)
-        {
-            return Ok(await _vehicleService.AsyncGetModelById(id));
-        }
-
         [HttpPut("[action]")]
         [Route("api/[Controller]/EditModel/")]
         public async Task<IActionResult> AsyncEditModel(VehicleDto vehicle)
@@ -130,15 +116,15 @@ namespace AngularApp.Controllers
         }
 
         [HttpGet]
-        [Route("api/[Controller]/DetailsMake/{id:int}")]
-        public async Task<IActionResult> AsyncDetailsMake(int id)
+        [Route("api/[Controller]/GetMake/{id:int}")]
+        public async Task<IActionResult> AsyncGetMakeObjectById(int id)
         {
             return Ok(await _vehicleService.AsyncGetMakeById(id));
         }
 
         [HttpGet]
-        [Route("api/[Controller]/DetailsModel/{id:int}")]
-        public async Task<IActionResult> AsyncDetailsModel(int id)
+        [Route("api/[Controller]/GetModel/{id:int}")]
+        public async Task<IActionResult> AsyncGetModelObjectById(int id)
         {
             return Ok(await _vehicleService.AsyncGetModelById(id));
         }
