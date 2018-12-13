@@ -11,8 +11,12 @@ export class ModelService {
   public makes: Models[];
 
 
-  constructor() {
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
 
+  }
+
+  GetModels() {
+    return this.http.get<Models[]>(this.baseUrl + 'api/SampleData/Models');
   }
 
   GetObject(result) {

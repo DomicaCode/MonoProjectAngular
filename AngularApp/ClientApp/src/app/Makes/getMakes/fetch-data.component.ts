@@ -1,20 +1,35 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+import { Subject } from 'rxjs/Subject';
+import { MakeService } from '../make.service';
 
 @Component({
   selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  templateUrl: './fetch-data.component.html',
+  providers: [MakeService]
 })
-export class FetchDataComponent {
-  public makes: Makes[];
+export class FetchDataComponent implements OnInit {
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    http.get<Makes[]>(baseUrl + 'api/SampleData/Makes').subscribe(result => {
-      this.makes = result;
-    }, error => console.error(error));
+  public makes: Makes[];
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private _makeService: MakeService) {
   }
 
+
+  ngOnInit() {
+    this.dtOptions =
+      {
+        pagingType: "full_numbers",
+        pageLength: 2
+      };
+
+    this._makeService.GetMakes().subscribe(result => {
+      this.makes = result;
+      this.dtTrigger.next();
+    })
+  }
 
   deleteMake(id) {
     if (confirm("Jeste li sigurni da zelite obrisati?")) {

@@ -2,12 +2,13 @@
 
 <p *ngIf="!makes"><em>Loading...</em></p>
 
-<table class='table' *ngIf="makes">
+<table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
   <thead>
     <tr>
       <th>Id</th>
       <th>Name</th>
       <th>Abrv</th>
+      <th>Links</th>
     </tr>
   </thead>
   <tbody>

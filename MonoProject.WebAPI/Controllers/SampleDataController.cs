@@ -33,7 +33,7 @@ namespace AngularApp.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> AsyncModels()
         {
-            var data = await _vehicleService.GetModel(0, 10);
+            var data = await _vehicleService.AsyncGetModel(0, 10);
 
             return Ok(data);
         }

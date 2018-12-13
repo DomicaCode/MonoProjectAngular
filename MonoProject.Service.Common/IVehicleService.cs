@@ -11,7 +11,7 @@ namespace MonoProject.Service.Common
     {
         Task<IEnumerable<VehicleDto>> AsyncGetMake(int index, int count);
 
-        Task<IEnumerable<VehicleDto>> GetModel(int index, int count);
+        Task<IEnumerable<VehicleDto>> AsyncGetModel(int index, int count);
 
         Task AsyncInsertMake(VehicleDto entity);
         Task AsyncInsertModel(VehicleDto entity);

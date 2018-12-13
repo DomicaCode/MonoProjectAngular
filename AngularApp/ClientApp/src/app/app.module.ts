@@ -16,6 +16,8 @@ import { ModelsComponent } from './Models/getModels/models.component';
 import { CreateModelComponent } from './Models/CRUD/createModel/createModel.component';
 import { EditModelComponent } from './Models/CRUD/editModel/editModel.component';
 import { DetailsModelComponent } from './Models/CRUD/detailsModel/detailsModel.component';
+import { DataTablesModule } from 'angular-datatables';
+import * as $ from 'jquery'
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { DetailsModelComponent } from './Models/CRUD/detailsModel/detailsModel.c
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    DataTablesModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

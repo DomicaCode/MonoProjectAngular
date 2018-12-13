@@ -43,7 +43,7 @@ namespace MonoProject.Service
             return vehicleDto;
         }
         
-        public async Task<IEnumerable<VehicleDto>> GetModel(int index, int count)
+        public async Task<IEnumerable<VehicleDto>> AsyncGetModel(int index, int count)
         {
             var data = await unitOfWork.ModelRepository.AsyncGet(index, count, p => p.Id);
 
