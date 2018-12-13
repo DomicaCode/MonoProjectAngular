@@ -29,7 +29,7 @@ namespace AngularApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IVehicleService, VehicleService>();
 
             services.AddDbContext<ProjectDbContext>();

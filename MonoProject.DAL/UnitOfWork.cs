@@ -7,7 +7,7 @@ using MonoProject.Repository.Common;
 
 namespace MonoProject.DAL
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
 
         private ProjectDbContext context = new ProjectDbContext();

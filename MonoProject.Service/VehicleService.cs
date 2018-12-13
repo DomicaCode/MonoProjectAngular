@@ -21,22 +21,21 @@ namespace MonoProject.Service
         private readonly ProjectDbContext _dbContext;
 
 
-        //Za unit of work nemam interface, te nisam koristio constructor injection jer (zbog trenutno nepoznatog razloga) 
-        //ako ga ubacis u constructor; constructor se uopce nece pokrenit te ces dobiti 500 error. Istrazujem.
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private IUnitOfWork _unitOfWork;
         private AutoMapperConfig mapConfig = new AutoMapperConfig();
 
 
 
-        public VehicleService(ProjectDbContext context)
+        public VehicleService(ProjectDbContext context, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _dbContext = context;
         }
 
 
         public async Task<IEnumerable<VehicleDto>> AsyncGetMake(int index, int count)
         {
-            var data =  await unitOfWork.MakeRepository.AsyncGet(index, count, p => p.Id);
+            var data =  await _unitOfWork.MakeRepository.AsyncGet(index, count, p => p.Id);
 
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
             IMapper mapper = config.CreateMapper(); 
@@ -48,7 +47,7 @@ namespace MonoProject.Service
         
         public async Task<IEnumerable<VehicleDto>> AsyncGetModel(int index, int count)
         {
-            var data = await unitOfWork.ModelRepository.AsyncGet(index, count, p => p.Id);
+            var data = await _unitOfWork.ModelRepository.AsyncGet(index, count, p => p.Id);
 
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
             IMapper mapper = config.CreateMapper();
@@ -67,7 +66,7 @@ namespace MonoProject.Service
 
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
-             await unitOfWork.MakeRepository.AsyncInsert(entity);
+             await _unitOfWork.MakeRepository.AsyncInsert(entity);
         }
 
         public async Task AsyncInsertModel(VehicleDto vehicleDto)
@@ -80,7 +79,7 @@ namespace MonoProject.Service
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
-            await unitOfWork.ModelRepository.AsyncInsert(entity);
+            await _unitOfWork.ModelRepository.AsyncInsert(entity);
         }
 
         public async Task AsyncDeleteMake(VehicleDto vehicleDto)
@@ -92,7 +91,7 @@ namespace MonoProject.Service
 
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
-            await unitOfWork.MakeRepository.AsyncDelete(entity);
+            await _unitOfWork.MakeRepository.AsyncDelete(entity);
         }
 
         public async Task AsyncDeleteModel(VehicleDto vehicleDto)
@@ -105,7 +104,7 @@ namespace MonoProject.Service
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
-            await unitOfWork.ModelRepository.AsyncDelete(entity);
+            await _unitOfWork.ModelRepository.AsyncDelete(entity);
         }
 
         public async Task AsyncUpdateMake(VehicleDto vehicleDto)
@@ -118,7 +117,7 @@ namespace MonoProject.Service
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
 
-            await unitOfWork.MakeRepository.AsyncEdit(entity);
+            await _unitOfWork.MakeRepository.AsyncEdit(entity);
         }
 
         public async Task AsyncUpdateModel(VehicleDto vehicleDto)
@@ -131,7 +130,7 @@ namespace MonoProject.Service
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
-            await unitOfWork.ModelRepository.AsyncEdit(entity);
+            await _unitOfWork.ModelRepository.AsyncEdit(entity);
         }
 
         public async Task AsyncDetailsMake(VehicleDto vehicleDto)
@@ -143,7 +142,7 @@ namespace MonoProject.Service
             var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
 
 
-            await unitOfWork.MakeRepository.AsyncDetails(entity);
+            await _unitOfWork.MakeRepository.AsyncDetails(entity);
         }
 
         public async Task AsyncDetailsModel(VehicleDto vehicleDto)
@@ -154,7 +153,7 @@ namespace MonoProject.Service
             var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
 
 
-            await unitOfWork.ModelRepository.AsyncDetails(entity);
+            await _unitOfWork.ModelRepository.AsyncDetails(entity);
         }
 
         public async Task<VehicleDto> AsyncGetMakeById(int id)
