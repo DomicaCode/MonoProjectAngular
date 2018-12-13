@@ -22,23 +22,19 @@ export class EditMakeComponent implements OnInit
 
   }
 
-  ngOnInit()
-  {
+
+  ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
       const id = parseInt(paramMap.get('id'), 10) || -1;
 
-      this.GetObjectById(id);
+      this._makeService.GetMakesById(id).subscribe(result => {
+        this.makes = result;
+
+        this.CurrentId = result['id'];
+        this.CurrentName = result['name'];
+        this.CurrentAbrv = result['abrv'];
+      })
     });
-  }
-
-
-  GetObjectById(id)
-  {
-    this.http.get< Makes[]>(this.baseUrl + "api/SampleData/GetMake/" + id).subscribe(result => {
-      this.makes = result;
-      this._makeService.GetObject(result);
-
-    }, error => console.error(error));
   }
 
 

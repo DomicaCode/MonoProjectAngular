@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MonoProject.Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MonoProject.DAL
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         internal ProjectDbContext context;
         internal DbSet<TEntity> dbSet;

@@ -11,6 +11,7 @@ using MonoProject.Service;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using MonoProject.Repository.Common;
 
 namespace MonoProject.Tests
 {
@@ -21,20 +22,20 @@ namespace MonoProject.Tests
            Updatat cu nakon sto naucim vise.
         */
 
-
+            
         [Fact]
         public void InsertModelTest()
         {
-            /*
+            
             //arrange
             var vehiclemake = new VehicleMakeEntity();
             var vehiclemodel = new VehicleModelEntity();
             var vehicledto = new VehicleDto();
 
-            var testMakeRepository = new Mock<IMakeRepository>();
+            var testMakeRepository = new Mock<IGenericRepository<VehicleMakeEntity>>();
             testMakeRepository.Setup(m => m.AsyncInsert(vehiclemake))
                 .Returns(Task.CompletedTask);
-            var testModelRepository = new Mock<IModelRepository>();
+            var testModelRepository = new Mock<IGenericRepository<VehicleModelEntity>>();
             testModelRepository.Setup(m => m.AsyncInsert(vehiclemodel))
                 .Returns(Task.CompletedTask);
 
@@ -44,7 +45,7 @@ namespace MonoProject.Tests
 
             context.Setup(m => m.Add(vehiclemake));
 
-            var testingClass = new VehicleService(testMakeRepository.Object, testModelRepository.Object, context.Object);
+            var testingClass = new VehicleService(context.Object);
 
             //act
 
@@ -55,7 +56,7 @@ namespace MonoProject.Tests
 
 
             Assert.True(insertMethod.IsCompletedSuccessfully);
-            */
+            
         }
 
         /*

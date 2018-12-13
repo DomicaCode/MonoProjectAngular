@@ -5,9 +5,8 @@ import 'rxjs/add/operator/map';
 
 @Component({})
 export class MakeService {
-  CurrentId: number;
-  CurrentName: string;
-  CurrentAbrv: string;
+
+
   public makes: Makes[];
 
 
@@ -19,10 +18,9 @@ export class MakeService {
     return this.http.get<Makes[]>(this.baseUrl + 'api/SampleData/Makes');
   }
 
-  GetObject(result) {
-    this.CurrentId = result['id'];
-    this.CurrentName = result['name'];
-    this.CurrentAbrv = result['abrv'];
+  GetMakesById(id)
+  {
+    return this.http.get<Makes[]>(this.baseUrl + "api/SampleData/GetMake/" + id);
   }
 }
 

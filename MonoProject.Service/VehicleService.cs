@@ -20,12 +20,15 @@ namespace MonoProject.Service
 
         private readonly ProjectDbContext _dbContext;
 
+
+        //Za unit of work nemam interface, te nisam koristio constructor injection jer (zbog trenutno nepoznatog razloga) 
+        //ako ga ubacis u constructor; constructor se uopce nece pokrenit te ces dobiti 500 error. Istrazujem.
         private UnitOfWork unitOfWork = new UnitOfWork();
         private AutoMapperConfig mapConfig = new AutoMapperConfig();
 
 
 
-        public VehicleService( ProjectDbContext context)
+        public VehicleService(ProjectDbContext context)
         {
             _dbContext = context;
         }

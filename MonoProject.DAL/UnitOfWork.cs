@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MonoProject.Model;
+using MonoProject.Repository.Common;
 
 namespace MonoProject.DAL
 {
@@ -10,10 +11,10 @@ namespace MonoProject.DAL
     {
 
         private ProjectDbContext context = new ProjectDbContext();
-        private GenericRepository<VehicleMakeEntity> makeRepository;
-        private GenericRepository<VehicleModelEntity> modelRepository;
+        private IGenericRepository<VehicleMakeEntity> makeRepository;
+        private IGenericRepository<VehicleModelEntity> modelRepository;
 
-        public GenericRepository<VehicleMakeEntity> MakeRepository
+        public IGenericRepository<VehicleMakeEntity> MakeRepository
         {
             get
             {
@@ -25,7 +26,7 @@ namespace MonoProject.DAL
             }
         }
 
-        public GenericRepository<VehicleModelEntity> ModelRepository
+        public IGenericRepository<VehicleModelEntity> ModelRepository
         {
             get
             {

@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MonoProject.Repository.Common;
+using MonoProject.DAL;
+using MonoProject.Model;
 
 namespace MonoProject.WebAPI.Controllers.NinjectTest
 {
@@ -17,12 +20,12 @@ namespace MonoProject.WebAPI.Controllers.NinjectTest
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         public override void Load()
-        {/*
+        {
             IKernel kernel = new StandardKernel();
-            kernel.Bind<IMakeRepository>().To<MakeRepository>();
-            kernel.Bind<IModelRepository>().To<ModelRepository>();
+            kernel.Bind<IGenericRepository<VehicleMakeEntity>>().To<GenericRepository<VehicleMakeEntity>>();
+            kernel.Bind<IGenericRepository<VehicleModelEntity>>().To<GenericRepository<VehicleModelEntity>>();
             kernel.Bind<IVehicleService>().To<VehicleService>();
-            */
+            
         }
     }
 }

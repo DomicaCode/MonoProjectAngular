@@ -4,10 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({})
 export class ModelService {
-  CurrentId: number;
-  CurrentMakeId: number;
-  CurrentName: string;
-  CurrentAbrv: string;
+
+
+
   public makes: Models[];
 
 
@@ -19,11 +18,8 @@ export class ModelService {
     return this.http.get<Models[]>(this.baseUrl + 'api/SampleData/Models');
   }
 
-  GetObject(result) {
-    this.CurrentId = result['id'];
-    this.CurrentMakeId = result['makeId'];
-    this.CurrentName = result['name'];
-    this.CurrentAbrv = result['abrv'];
+  GetModelsById(id) {
+    return this.http.get<Models[]>(this.baseUrl + "api/SampleData/GetModel/" + id);
   }
 }
 
