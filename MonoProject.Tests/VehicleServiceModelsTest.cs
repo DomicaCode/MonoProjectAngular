@@ -39,13 +39,15 @@ namespace MonoProject.Tests
             testModelRepository.Setup(m => m.AsyncInsert(vehiclemodel))
                 .Returns(Task.CompletedTask);
 
+            var testUnitOfWork = new Mock<IUnitOfWork>();
+
             //var options = new DbContextOptionsBuilder<ProjectDbContext>().UseInMemoryDatabase(databaseName: "mono").Options;
 
             var context = new Mock<ProjectDbContext>();
 
             context.Setup(m => m.Add(vehiclemake));
 
-            var testingClass = new VehicleService(context.Object);
+            var testingClass = new VehicleService(context.Object, testUnitOfWork.Object);
 
             //act
 

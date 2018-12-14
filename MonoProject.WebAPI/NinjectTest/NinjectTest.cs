@@ -17,7 +17,6 @@ namespace MonoProject.WebAPI.Controllers.NinjectTest
 {
     public class NinjectTest : NinjectModule
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         public override void Load()
         {

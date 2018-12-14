@@ -6,24 +6,15 @@ using MonoProject.Model;
 
 namespace MonoProject.Common
 {
-    public class AutoMapperConfig
+    public static class AutoMapperConfig
     {
-        public VehicleMakeEntity MapViewModelToEntityMake(VehicleDto viewModel)
+        public static void Initialize()
         {
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleMakeEntity>(); });
-            IMapper mapper = config.CreateMapper();
-            var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(viewModel);
-            return entity;
-        }
-
-        public VehicleDto MapEntityToViewModelMake(VehicleMakeEntity entity)
-        {
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
-            var viewModel = mapper.Map<VehicleMakeEntity, VehicleDto>(entity);
-
-
-            return viewModel;
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<VehicleMakeEntity, VehicleDto>().ReverseMap();
+                cfg.CreateMap<VehicleModelEntity, VehicleDto>().ReverseMap();
+            });
         }
 
     }

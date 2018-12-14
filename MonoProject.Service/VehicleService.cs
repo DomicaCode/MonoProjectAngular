@@ -22,8 +22,6 @@ namespace MonoProject.Service
 
 
         private IUnitOfWork _unitOfWork;
-        private AutoMapperConfig mapConfig = new AutoMapperConfig();
-
 
 
         public VehicleService(ProjectDbContext context, IUnitOfWork unitOfWork)
@@ -37,10 +35,7 @@ namespace MonoProject.Service
         {
             var data =  await _unitOfWork.MakeRepository.AsyncGet(index, count, p => p.Id);
 
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper(); 
-
-            var vehicleDto = mapper.Map<IEnumerable<VehicleMakeEntity>, IEnumerable<VehicleDto>>(data);
+            var vehicleDto = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeEntity>, IEnumerable<VehicleDto>>(data);
 
             return vehicleDto;
         }
@@ -49,34 +44,22 @@ namespace MonoProject.Service
         {
             var data = await _unitOfWork.ModelRepository.AsyncGet(index, count, p => p.Id);
 
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var vehicleDto = mapper.Map<IEnumerable<VehicleModelEntity>, IEnumerable<VehicleDto>>(data);
+            var vehicleDto = AutoMapper.Mapper.Map<IEnumerable<VehicleModelEntity>, IEnumerable<VehicleDto>>(data);
 
             return vehicleDto;
         }
         
         public async Task AsyncInsertMake(VehicleDto vehicleDto)
         {
-            
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleMakeEntity>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
              await _unitOfWork.MakeRepository.AsyncInsert(entity);
         }
 
         public async Task AsyncInsertModel(VehicleDto vehicleDto)
         {
-            
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleModelEntity>(); });
-            IMapper mapper = config.CreateMapper();
 
-            var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
             await _unitOfWork.ModelRepository.AsyncInsert(entity);
@@ -84,24 +67,15 @@ namespace MonoProject.Service
 
         public async Task AsyncDeleteMake(VehicleDto vehicleDto)
         {
-            
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleMakeEntity>(); });
-            IMapper mapper = config.CreateMapper();
 
-            var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
             await _unitOfWork.MakeRepository.AsyncDelete(entity);
         }
 
         public async Task AsyncDeleteModel(VehicleDto vehicleDto)
         {
-            
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleModelEntity>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
             await _unitOfWork.ModelRepository.AsyncDelete(entity);
@@ -109,12 +83,7 @@ namespace MonoProject.Service
 
         public async Task AsyncUpdateMake(VehicleDto vehicleDto)
         {
-            
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleMakeEntity>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
 
             await _unitOfWork.MakeRepository.AsyncEdit(entity);
@@ -122,12 +91,7 @@ namespace MonoProject.Service
 
         public async Task AsyncUpdateModel(VehicleDto vehicleDto)
         {
-            
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleDto, VehicleModelEntity>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
 
             await _unitOfWork.ModelRepository.AsyncEdit(entity);
@@ -135,11 +99,8 @@ namespace MonoProject.Service
 
         public async Task AsyncDetailsMake(VehicleDto vehicleDto)
         {
-            // Ovaj automapper config treba abstractat
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
 
-            var entity = mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
 
 
             await _unitOfWork.MakeRepository.AsyncDetails(entity);
@@ -147,10 +108,7 @@ namespace MonoProject.Service
 
         public async Task AsyncDetailsModel(VehicleDto vehicleDto)
         {
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var entity = mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
 
 
             await _unitOfWork.ModelRepository.AsyncDetails(entity);
@@ -160,10 +118,7 @@ namespace MonoProject.Service
         {
             var entity = _dbContext.VehicleMake.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
 
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleMakeEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var vehicleDto = mapper.Map<VehicleMakeEntity, VehicleDto>(entity);
+            var vehicleDto = AutoMapper.Mapper.Map<VehicleMakeEntity, VehicleDto>(entity);
 
             return vehicleDto;
         }
@@ -172,10 +127,7 @@ namespace MonoProject.Service
         {
             var entity = _dbContext.VehicleModel.AsNoTracking().Where(x => x.MakeId == id).FirstOrDefault();
 
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var vehicleDto = mapper.Map<VehicleModelEntity, VehicleDto>(entity);
+            var vehicleDto = AutoMapper.Mapper.Map<VehicleModelEntity, VehicleDto>(entity);
 
             return vehicleDto;
         }
@@ -184,10 +136,7 @@ namespace MonoProject.Service
         {
             var entity = _dbContext.VehicleModel.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
 
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<VehicleModelEntity, VehicleDto>(); });
-            IMapper mapper = config.CreateMapper();
-
-            var vehicleDto = mapper.Map<VehicleModelEntity, VehicleDto>(entity);
+            var vehicleDto = AutoMapper.Mapper.Map<VehicleModelEntity, VehicleDto>(entity);
 
             return vehicleDto;
         }

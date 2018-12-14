@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MonoProject.Common;
 
 namespace AngularApp
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -41,6 +43,9 @@ namespace AngularApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            AutoMapperConfig.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
