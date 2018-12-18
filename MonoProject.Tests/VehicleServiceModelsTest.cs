@@ -33,10 +33,10 @@ namespace MonoProject.Tests
             var vehicledto = new VehicleDto();
 
             var testMakeRepository = new Mock<IGenericRepository<VehicleMakeEntity>>();
-            testMakeRepository.Setup(m => m.AsyncInsert(vehiclemake))
+            testMakeRepository.Setup(m => m.InsertAsync(vehiclemake))
                 .Returns(Task.CompletedTask);
             var testModelRepository = new Mock<IGenericRepository<VehicleModelEntity>>();
-            testModelRepository.Setup(m => m.AsyncInsert(vehiclemodel))
+            testModelRepository.Setup(m => m.InsertAsync(vehiclemodel))
                 .Returns(Task.CompletedTask);
 
             var testUnitOfWork = new Mock<IUnitOfWork>();
@@ -51,7 +51,7 @@ namespace MonoProject.Tests
 
             //act
 
-            var insertMethod = testingClass.AsyncInsertModel(vehicledto);
+            var insertMethod = testingClass.InsertModelAsync(vehicledto);
 
             //assert
             //testingClass.InsertModel().Should().

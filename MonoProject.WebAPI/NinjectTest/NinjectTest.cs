@@ -24,6 +24,7 @@ namespace MonoProject.WebAPI.Controllers.NinjectTest
             kernel.Bind<IGenericRepository<VehicleMakeEntity>>().To<GenericRepository<VehicleMakeEntity>>();
             kernel.Bind<IGenericRepository<VehicleModelEntity>>().To<GenericRepository<VehicleModelEntity>>();
             kernel.Bind<IVehicleService>().To<VehicleService>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             
         }
     }

@@ -15,11 +15,11 @@ export class ModelService {
   }
 
   GetModels() {
-    return this.http.get<Models[]>(this.baseUrl + 'api/SampleData/Models');
+    return this.http.get<Models[]>(this.baseUrl + 'api/Model/Models');
   }
 
   GetModelsById(id) {
-    return this.http.get<Models[]>(this.baseUrl + "api/SampleData/GetModel/" + id);
+    return this.http.get<Models[]>(this.baseUrl + "api/Model/GetModel/" + id);
   }
 }
 

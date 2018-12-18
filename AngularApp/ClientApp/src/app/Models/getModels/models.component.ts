@@ -32,7 +32,7 @@ export class ModelsComponent implements OnInit {
 
   deleteModel(id) {
     if (confirm("Jeste li sigurni da zelite obrisati?")) {
-      return this.http.delete(this.baseUrl + "api/SampleData/DeleteModel/" + id)
+      return this.http.delete(this.baseUrl + "api/Model/DeleteModel/" + id)
         .subscribe();
     }
   }

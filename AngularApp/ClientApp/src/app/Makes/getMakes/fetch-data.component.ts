@@ -33,7 +33,7 @@ export class FetchDataComponent implements OnInit {
 
   deleteMake(id) {
     if (confirm("Jeste li sigurni da zelite obrisati?")) {
-      return this.http.delete(this.baseUrl + "api/SampleData/DeleteMake/" + id)
+      return this.http.delete(this.baseUrl + "api/Make/DeleteMake/" + id)
         .subscribe();
     }
   }

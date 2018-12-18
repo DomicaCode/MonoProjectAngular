@@ -9,21 +9,21 @@ namespace MonoProject.Service.Common
 {
     public interface IVehicleService
     {
-        Task<IEnumerable<VehicleDto>> AsyncGetMake(int index, int count);
+        Task<IEnumerable<VehicleDto>> GetMakeAsync(int index, int count);
 
-        Task<IEnumerable<VehicleDto>> AsyncGetModel(int index, int count);
+        Task<IEnumerable<VehicleDto>> GetModelAsync(int index, int count);
 
-        Task AsyncInsertMake(VehicleDto entity);
-        Task AsyncInsertModel(VehicleDto entity);
+        Task InsertMakeAsync(VehicleDto entity);
+        Task InsertModelAsync(VehicleDto entity);
 
-        Task AsyncDeleteMake(VehicleDto entity);
-        Task AsyncDeleteModel(VehicleDto entity);
+        Task DeleteMakeAsync(VehicleDto entity);
+        Task DeleteModelAsync(VehicleDto entity);
 
-        Task AsyncUpdateMake(VehicleDto entity);
-        Task AsyncUpdateModel(VehicleDto entity);
+        Task UpdateMakeAsync(VehicleDto entity);
+        Task UpdateModelAsync(VehicleDto entity);
 
-        Task<VehicleDto> AsyncGetMakeById(int id);
-        Task<VehicleDto> AsyncGetModelByMakeId(int id);
-        Task<VehicleDto> AsyncGetModelById(int id);
+        Task<VehicleDto> GetMakeByIdAsync(int id);
+        Task<VehicleDto> GetModelByMakeIdAsync(int id);
+        Task<VehicleDto> GetModelByIdAsync(int id);
     }
 }

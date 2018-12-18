@@ -15,12 +15,12 @@ export class MakeService {
   }
 
   GetMakes() {
-    return this.http.get<Makes[]>(this.baseUrl + 'api/SampleData/Makes');
+    return this.http.get<Makes[]>(this.baseUrl + 'api/Make/Makes');
   }
 
   GetMakesById(id)
   {
-    return this.http.get<Makes[]>(this.baseUrl + "api/SampleData/GetMake/" + id);
+    return this.http.get<Makes[]>(this.baseUrl + "api/Make/GetMake/" + id);
   }
 }
 

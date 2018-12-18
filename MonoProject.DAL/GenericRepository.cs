@@ -20,31 +20,31 @@ namespace MonoProject.DAL
             this.dbSet = context.Set<TEntity>();
         }
 
-        public async virtual Task AsyncInsert(TEntity entity)
+        public async virtual Task InsertAsync(TEntity entity)
         {
             dbSet.Add(entity);
             await context.SaveChangesAsync();
         }
 
-        public async virtual Task AsyncDelete(TEntity entity)
+        public async virtual Task DeleteAsync(TEntity entity)
         {
             dbSet.Remove(entity);
             await context.SaveChangesAsync();
         }
 
-        public async virtual Task AsyncEdit(TEntity entity)
+        public async virtual Task EditAsync(TEntity entity)
         {
             dbSet.Update(entity);
             await context.SaveChangesAsync();
         }
 
-        public async virtual Task AsyncDetails(TEntity entity)
+        public async virtual Task DetailsAsync(TEntity entity)
         {
             dbSet.Find(entity);
             await context.SaveChangesAsync();
         }
 
-        public async virtual Task<IEnumerable<TEntity>> AsyncGet(int index, int count, Expression<Func<TEntity, int>> orderLambda)
+        public async virtual Task<IEnumerable<TEntity>> GetAsync(int index, int count, Expression<Func<TEntity, int>> orderLambda)
         {
             return dbSet.Skip(index * count).Take(count).OrderBy(orderLambda);
         }
