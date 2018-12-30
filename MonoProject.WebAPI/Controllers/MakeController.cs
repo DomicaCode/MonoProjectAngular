@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MonoProject.Model;
+using MonoProject.Model.Interfaces;
 using MonoProject.Service.Common;
+using MonoProject.WebAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,8 +24,11 @@ namespace MonoProject.WebAPI.Controllers
         [Route("api/[controller]/Makes")]
         [HttpGet("[action]")]
         public async Task<IActionResult> MakesAsync()
+
         {
             var data = await _vehicleService.GetMakeAsync(0, 10);
+
+           //var vehicleDto = AutoMapper.Mapper.Map<IEnumerable<IVehicleMakeEntity>, IEnumerable<VehicleDto>>(data);
 
             return Ok(data);
         }
@@ -32,7 +37,10 @@ namespace MonoProject.WebAPI.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateMakeAsync([FromForm] VehicleDto vehicle)
         {
-            await _vehicleService.InsertMakeAsync(vehicle);
+
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicle);
+
+            await _vehicleService.InsertMakeAsync(entity);
 
             return Redirect("./fetch-data");
         }
@@ -41,11 +49,12 @@ namespace MonoProject.WebAPI.Controllers
         [HttpDelete("[action]")]
         public async Task<IActionResult> DeleteMakeAsync(int id)
         {
-            VehicleDto vehiclemodel = await _vehicleService.GetModelByMakeIdAsync(id);
+            IVehicleModelEntity vehiclemodel = await _vehicleService.GetModelByMakeIdAsync(id);
 
             if (vehiclemodel != null)
             {
-                await _vehicleService.DeleteModelAsync(vehiclemodel);
+                await _vehicleService.DeleteModelAsync(id);
+
                 await DeleteMakeModelAsync(id);
             }
             else
@@ -58,10 +67,10 @@ namespace MonoProject.WebAPI.Controllers
 
         }
 
+        
         public async Task DeleteMakeModelAsync(int id)
         {
-            VehicleDto vehicle = await _vehicleService.GetMakeByIdAsync(id);
-            await _vehicleService.DeleteMakeAsync(vehicle);
+            await _vehicleService.DeleteMakeAsync(id);
         }
 
         [HttpPut("[action]")]
@@ -69,7 +78,10 @@ namespace MonoProject.WebAPI.Controllers
         public async Task<IActionResult> EditMakeAsync(VehicleDto vehicle)
         {
             //vehicle = _vehicleService.GetMakeById(id);
-            await _vehicleService.UpdateMakeAsync(vehicle);
+
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicle);
+
+            await _vehicleService.UpdateMakeAsync(entity);
 
             return RedirectToAction("Make");
         }

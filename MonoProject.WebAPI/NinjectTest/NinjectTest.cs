@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using MonoProject.Repository.Common;
 using MonoProject.DAL;
 using MonoProject.Model;
+using MonoProject.Model.Interfaces;
+using MonoProject.Repository;
 
 namespace MonoProject.WebAPI.Controllers.NinjectTest
 {
@@ -25,6 +27,8 @@ namespace MonoProject.WebAPI.Controllers.NinjectTest
             kernel.Bind<IGenericRepository<VehicleModelEntity>>().To<GenericRepository<VehicleModelEntity>>();
             kernel.Bind<IVehicleService>().To<VehicleService>();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<IVehicleModelEntity>().To<VehicleModelEntity>();
+            kernel.Bind<IVehicleMakeEntity>().To<VehicleMakeEntity>();
             
         }
     }

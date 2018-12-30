@@ -1,5 +1,4 @@
-﻿using MonoProject.Common;
-using MonoProject.WebAPI.Controllers.NinjectTest;
+﻿using MonoProject.WebAPI.Controllers.NinjectTest;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +12,7 @@ namespace MonoProject.WebAPI
     {
         public static void Register()
         {
-            AutoMapperConfig.Initialize();
+           // AutoMapperConfig.Initialize();
         }
     }
 }

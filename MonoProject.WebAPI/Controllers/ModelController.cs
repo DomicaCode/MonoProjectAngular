@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using MonoProject.Service.Common;
 using MonoProject.Model;
 using Microsoft.AspNetCore.Mvc;
+using MonoProject.WebAPI.ViewModels;
+using MonoProject.Model.Interfaces;
 
 namespace AngularApp.Controllers
 {
@@ -26,7 +28,9 @@ namespace AngularApp.Controllers
         {
             var data = await _vehicleService.GetModelAsync(0, 10);
 
-            return Ok(data);
+            var vehicleDto = AutoMapper.Mapper.Map<IEnumerable<IVehicleModelEntity>, IEnumerable<VehicleDto>>(data);
+
+            return Ok(vehicleDto);
         }
 
 
@@ -34,7 +38,10 @@ namespace AngularApp.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateModelAsync([FromForm] VehicleDto vehicle)
         {
-            await _vehicleService.InsertModelAsync(vehicle);
+
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicle);
+
+            await _vehicleService.InsertModelAsync(entity);
 
             return RedirectToAction("Model");
         }
@@ -44,8 +51,8 @@ namespace AngularApp.Controllers
         [HttpDelete("[action]")]
         public async Task<IActionResult> DeleteModelAsync(int id)
         {
-            VehicleDto vehiclemodel = await _vehicleService.GetModelByIdAsync(id);
-            await _vehicleService.DeleteModelAsync(vehiclemodel);
+
+            await _vehicleService.DeleteModelAsync(id);
 
             return RedirectToAction("Model");
 
@@ -55,7 +62,10 @@ namespace AngularApp.Controllers
         [Route("api/[Controller]/EditModel/")]
         public async Task<IActionResult> EditModelAsync(VehicleDto vehicle)
         {
-            await _vehicleService.UpdateModelAsync(vehicle);
+
+            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicle);
+
+            await _vehicleService.UpdateModelAsync(entity);
 
             return RedirectToAction("Model");
         }

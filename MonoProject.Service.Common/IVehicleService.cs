@@ -1,4 +1,5 @@
 ﻿using MonoProject.Model;
+using MonoProject.Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,21 +10,21 @@ namespace MonoProject.Service.Common
 {
     public interface IVehicleService
     {
-        Task<IEnumerable<VehicleDto>> GetMakeAsync(int index, int count);
+        Task<IEnumerable<IVehicleMakeEntity>> GetMakeAsync(int index, int count);
 
-        Task<IEnumerable<VehicleDto>> GetModelAsync(int index, int count);
+        Task<IEnumerable<IVehicleModelEntity>> GetModelAsync(int index, int count);
 
-        Task InsertMakeAsync(VehicleDto entity);
-        Task InsertModelAsync(VehicleDto entity);
+        Task InsertMakeAsync(IVehicleMakeEntity entity);
+        Task InsertModelAsync(IVehicleModelEntity entity);
 
-        Task DeleteMakeAsync(VehicleDto entity);
-        Task DeleteModelAsync(VehicleDto entity);
+        Task DeleteMakeAsync(int id);
+        Task DeleteModelAsync(int id);
 
-        Task UpdateMakeAsync(VehicleDto entity);
-        Task UpdateModelAsync(VehicleDto entity);
+        Task UpdateMakeAsync(IVehicleMakeEntity entity);
+        Task UpdateModelAsync(IVehicleModelEntity entity);
 
-        Task<VehicleDto> GetMakeByIdAsync(int id);
-        Task<VehicleDto> GetModelByMakeIdAsync(int id);
-        Task<VehicleDto> GetModelByIdAsync(int id);
+        Task<IVehicleMakeEntity> GetMakeByIdAsync(int id);
+        Task<IVehicleModelEntity> GetModelByMakeIdAsync(int id);
+        Task<IVehicleModelEntity> GetModelByIdAsync(int id);
     }
 }

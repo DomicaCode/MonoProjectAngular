@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MonoProject.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MonoProject.Model
 {
-    public class VehicleModelEntity
+    public class VehicleModelEntity : IVehicleModelEntity
     {
         public int Id { get; set; }
 

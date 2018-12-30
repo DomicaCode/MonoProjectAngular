@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MonoProject.Model\MonoProject.Model.csproj" />
+    <ProjectReference Include="..\MonoProject.WebAPI\MonoProject.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MonoProject.Common;
+using MonoProject.Repository.Common;
+using MonoProject.Repository;
+using MonoProject.Model;
+using MonoProject.Model.Interfaces;
 
 namespace AngularApp
 {
@@ -33,6 +37,17 @@ namespace AngularApp
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IMakeRepository, MakeRepository>();
+            services.AddScoped<IModelRepository, ModelRepository>();
+
+            services.AddScoped<IVehicleMakeEntity, VehicleMakeEntity>();
+            services.AddScoped<IVehicleModelEntity, VehicleModelEntity>();
+
+            services.AddScoped<IGenericRepository<VehicleMakeEntity>, GenericRepository<VehicleMakeEntity>>();
+            services.AddScoped<IGenericRepository<VehicleModelEntity>, GenericRepository<VehicleModelEntity>>();
+
+            services.AddScoped<IGenericRepository<IVehicleMakeEntity>, GenericRepository<IVehicleMakeEntity>>();
+            services.AddScoped<IGenericRepository<IVehicleModelEntity>, GenericRepository<IVehicleModelEntity>>();
 
             services.AddDbContext<ProjectDbContext>();
 

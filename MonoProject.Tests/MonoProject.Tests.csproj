@@ -38,6 +38,7 @@
     <ProjectReference Include="..\MonoProject.Repository.Common\MonoProject.Repository.Common.csproj" />
     <ProjectReference Include="..\MonoProject.Repository\MonoProject.Repository.csproj" />
     <ProjectReference Include="..\MonoProject.Service\MonoProject.Service.csproj" />
+    <ProjectReference Include="..\MonoProject.WebAPI\MonoProject.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

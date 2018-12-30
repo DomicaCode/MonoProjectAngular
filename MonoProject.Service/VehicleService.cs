@@ -10,8 +10,9 @@ using System.Linq;
 using AutoMapper;
 using MonoProject.DAL;
 using System.Threading.Tasks;
-using MonoProject.Common;
 using Ninject;
+using MonoProject.Model.Interfaces;
+using MonoProject.Repository.Common;
 
 namespace MonoProject.Service
 {
@@ -19,84 +20,95 @@ namespace MonoProject.Service
     {
 
 
-        private readonly ProjectDbContext _dbContext;
-
         private IUnitOfWork _unitOfWork;
+        private IMakeRepository _makeRepository;
+        private IModelRepository _modelRepository;
 
 
-        public VehicleService(ProjectDbContext context, IUnitOfWork unitOfWork)
+
+        public VehicleService(IUnitOfWork unitOfWork, IMakeRepository makeRepository, IModelRepository modelRepository)
         {
             _unitOfWork = unitOfWork;
-            _dbContext = context;
+            _makeRepository = makeRepository;
+            _modelRepository = modelRepository;
         }
 
 
-        public async Task<IEnumerable<VehicleDto>> GetMakeAsync(int index, int count)
+        public async Task<IEnumerable<IVehicleMakeEntity>> GetMakeAsync(int index, int count)
         {
-            var data =  await _unitOfWork.MakeRepository.GetAsync(index, count, p => p.Id);
+            var data =  await _makeRepository.GetAsync(index, count, p => p.Id);
 
-            var vehicleDto = AutoMapper.Mapper.Map<IEnumerable<VehicleMakeEntity>, IEnumerable<VehicleDto>>(data);
-
-            return vehicleDto;
+            return data;
         }
         
-        public async Task<IEnumerable<VehicleDto>> GetModelAsync(int index, int count)
+        public async Task<IEnumerable<IVehicleModelEntity>> GetModelAsync(int index, int count)
         {
-            var data = await _unitOfWork.ModelRepository.GetAsync(index, count, p => p.Id);
+            var data = await _modelRepository.GetAsync(index, count, p => p.Id);
 
-            var vehicleDto = AutoMapper.Mapper.Map<IEnumerable<VehicleModelEntity>, IEnumerable<VehicleDto>>(data);
-
-            return vehicleDto;
+            return data;
         }
         
-        public async Task InsertMakeAsync(VehicleDto vehicleDto)
+        public async Task InsertMakeAsync(IVehicleMakeEntity vehicleMake)
         {
-            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
             
-             await _unitOfWork.MakeRepository.InsertAsync(entity);
+             await _makeRepository.InsertAsync(vehicleMake);
         }
 
-        public async Task InsertModelAsync(VehicleDto vehicleDto)
+        public async Task InsertModelAsync(IVehicleModelEntity vehicleModel)
         {
 
-            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
-            
-
-            await _unitOfWork.ModelRepository.InsertAsync(entity);
+            await _modelRepository.InsertAsync(vehicleModel);
         }
 
-        public async Task DeleteMakeAsync(VehicleDto vehicleDto)
+        public async Task DeleteMakeAsync(int id)
+        {
+            var vehicle = await _makeRepository.GetMakeByIdAsync(id);
+
+            await _makeRepository.DeleteAsync(vehicle);
+        }
+
+        public async Task DeleteModelAsync(int id)
+        {
+            var vehicle = await _modelRepository.GetModelByIdAsync(id);
+
+            await _modelRepository.DeleteAsync(vehicle);
+        }
+
+        public async Task UpdateMakeAsync(IVehicleMakeEntity vehicleMake)
         {
 
-            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
-            
-            await _unitOfWork.MakeRepository.DeleteAsync(entity);
+            await _makeRepository.EditAsync(vehicleMake);
         }
 
-        public async Task DeleteModelAsync(VehicleDto vehicleDto)
+        public async Task UpdateModelAsync(IVehicleModelEntity vehicleModel)
         {
-            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
             
-
-            await _unitOfWork.ModelRepository.DeleteAsync(entity);
+            await _modelRepository.EditAsync(vehicleModel);
         }
 
-        public async Task UpdateMakeAsync(VehicleDto vehicleDto)
+        public async Task<IVehicleMakeEntity> GetMakeByIdAsync(int id)
         {
-            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleMakeEntity>(vehicleDto);
-            
+            var data = await _makeRepository.GetMakeByIdAsync(id);
 
-            await _unitOfWork.MakeRepository.EditAsync(entity);
+            return data;
         }
 
-        public async Task UpdateModelAsync(VehicleDto vehicleDto)
+        public async Task<IVehicleModelEntity> GetModelByMakeIdAsync(int id)
         {
-            var entity = AutoMapper.Mapper.Map<VehicleDto, VehicleModelEntity>(vehicleDto);
-            
+            var data = await _modelRepository.GetModelByMakeIdAsync(id);
 
-            await _unitOfWork.ModelRepository.EditAsync(entity);
+            return data;
+        }
+        public async Task<IVehicleModelEntity> GetModelByIdAsync(int id)
+        {
+            var data = await _modelRepository.GetModelByIdAsync(id);
+
+            return data;
         }
 
+
+
+        /*
         public async Task DetailsMakeAsync(VehicleDto vehicleDto)
         {
 
@@ -113,32 +125,7 @@ namespace MonoProject.Service
 
             await _unitOfWork.ModelRepository.DetailsAsync(entity);
         }
+        */
 
-        public async Task<VehicleDto> GetMakeByIdAsync(int id)
-        {
-            var entity = _dbContext.VehicleMake.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
-
-            var vehicleDto = AutoMapper.Mapper.Map<VehicleMakeEntity, VehicleDto>(entity);
-
-            return vehicleDto;
-        }
-
-        public async Task<VehicleDto> GetModelByMakeIdAsync(int id)
-        {
-            var entity = _dbContext.VehicleModel.AsNoTracking().Where(x => x.MakeId == id).FirstOrDefault();
-
-            var vehicleDto = AutoMapper.Mapper.Map<VehicleModelEntity, VehicleDto>(entity);
-
-            return vehicleDto;
-        }
-
-        public async Task<VehicleDto> GetModelByIdAsync(int id)
-        {
-            var entity = _dbContext.VehicleModel.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
-
-            var vehicleDto = AutoMapper.Mapper.Map<VehicleModelEntity, VehicleDto>(entity);
-
-            return vehicleDto;
-        }
     }
 }

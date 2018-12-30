@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using MonoProject.Model;
+using MonoProject.Model.Interfaces;
+using MonoProject.WebAPI.ViewModels;
 
 namespace MonoProject.Common
 {
