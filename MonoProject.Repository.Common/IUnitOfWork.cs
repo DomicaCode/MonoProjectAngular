@@ -4,12 +4,13 @@ using MonoProject.Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MonoProject.Repository.Common
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<IVehicleMakeEntity> MakeRepository { get; }
-        IGenericRepository<IVehicleModelEntity> ModelRepository { get; }
+
+        Task<bool> Commit<T>(T entity) where T : class;
     }
 }

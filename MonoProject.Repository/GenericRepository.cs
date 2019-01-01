@@ -15,35 +15,37 @@ namespace MonoProject.Repository
     {
         internal ProjectDbContext context;
         internal DbSet<TEntity> dbSet;
+        internal IUnitOfWork _uow;
 
-        public GenericRepository(ProjectDbContext context)
+        public GenericRepository(ProjectDbContext context, IUnitOfWork uow)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
+            _uow = uow;
         }
 
         public async virtual Task InsertAsync(TEntity entity)
         {
             dbSet.Add(entity);
-            await context.SaveChangesAsync();
+            await _uow.Commit(entity);
         }
 
         public async virtual Task DeleteAsync(TEntity entity)
         {
             dbSet.Remove(entity);
-            await context.SaveChangesAsync();
+            await _uow.Commit(entity);
         }
 
         public async virtual Task EditAsync(TEntity entity)
         {
             dbSet.Update(entity);
-            await context.SaveChangesAsync();
+            await _uow.Commit(entity);
         }
 
         public async virtual Task DetailsAsync(TEntity entity)
         {
             dbSet.Find(entity);
-            await context.SaveChangesAsync();
+            await _uow.Commit(entity);
         }
 
         public async virtual Task<IEnumerable<TEntity>> GetAsync(int index, int count, Expression<Func<TEntity, int>> orderLambda)
