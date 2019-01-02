@@ -20,10 +20,18 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
-    <PackageReference Include="Ninject" Version="3.3.4" />
-    <PackageReference Include="Ninject.Web" Version="3.2.1" />
-    <PackageReference Include="Ninject.Web.Common" Version="3.3.1" />
-    <PackageReference Include="Ninject.Web.WebApi" Version="3.3.0" />
+    <PackageReference Include="Ninject" Version="3.3.4">
+      <NoWarn>NU1603,NU1608,NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Ninject.Web" Version="3.2.1">
+      <NoWarn>NU1603,NU1608,NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Ninject.Web.Common" Version="3.3.1">
+      <NoWarn>NU1603,NU1608,NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Ninject.Web.WebApi" Version="3.3.0">
+      <NoWarn>NU1603,NU1608,NU1701</NoWarn>
+    </PackageReference>
     <PackageReference Include="NonFactors.Grid.Mvc6" Version="4.0.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">

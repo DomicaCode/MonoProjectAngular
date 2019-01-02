@@ -33,10 +33,10 @@ namespace MonoProject.Tests
             var vehiclemodel = new VehicleModelEntity();
             var vehicledto = new VehicleDto();
 
-            var testMakeRepository = new Mock<IGenericRepository<VehicleMakeEntity>>();
+            var testMakeRepository = new Mock<IMakeRepository>();
             testMakeRepository.Setup(m => m.InsertAsync(vehiclemake))
                 .Returns(Task.CompletedTask);
-            var testModelRepository = new Mock<IGenericRepository<VehicleModelEntity>>();
+            var testModelRepository = new Mock<IModelRepository>();
             testModelRepository.Setup(m => m.InsertAsync(vehiclemodel))
                 .Returns(Task.CompletedTask);
 
@@ -48,17 +48,17 @@ namespace MonoProject.Tests
 
             context.Setup(m => m.Add(vehiclemake));
 
-           // var testingClass = new VehicleService(context.Object, testUnitOfWork.Object);
+            var testingClass = new VehicleService(testUnitOfWork.Object, testMakeRepository.Object, testModelRepository.Object);
 
             //act
 
-           // var insertMethod = testingClass.InsertModelAsync(vehiclemodel);
+            var insertMethod = testingClass.InsertModelAsync(vehiclemodel);
 
             //assert
             //testingClass.InsertModel().Should().
 
 
-            //Assert.True(insertMethod.IsCompletedSuccessfully);
+            Assert.True(insertMethod.IsCompletedSuccessfully);
             
         }
 
